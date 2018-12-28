@@ -1,5 +1,4 @@
 import { Directive, HostBinding, Input, HostListener, Output, EventEmitter } from '@angular/core';
-
 @Directive({
   selector: '[highlited]',
   exportAs: 'hl'
@@ -7,31 +6,25 @@ import { Directive, HostBinding, Input, HostListener, Output, EventEmitter } fro
 export class HighlitedDirective {
   @Input('highlited')
   isHighlited = false;
-
-
   constructor() {
     console.log('Directive Created')
    }
-
    @HostBinding('class.boxshadow')
   get cssClasses(){
      return this.isHighlited;
    }
-
    @HostBinding('attr.disable')
    get isDisable(){
       return true;  
     }
-
     @Output()
     toogleHighlite = new EventEmitter();
-  
+    
     @HostListener('mouseover', ['$event'])
     mouseOver(){
       this.isHighlited = true
       this.toogleHighlite.emit(this.isHighlited)
     }
-
     @HostListener('mouseleave')
     mouseLeave(){
       this.isHighlited = false
